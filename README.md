@@ -111,7 +111,10 @@ Sustainify is a sustainable marketplace app. This is a marketplace where users c
 <br>
 
 ### [BONUS] Digital Wireframes & Mockups
+
 ##Figma prototype
+
+
 <a href="https://www.figma.com/file/pRh5OtFxnUPM2o0gufdflc/Sustainify?type=design&node-id=0%3A1&mode=design&t=58PqRnP880iasYgR-1">Figma Prototype</a>
 
 ### [BONUS] Interactive Prototype
