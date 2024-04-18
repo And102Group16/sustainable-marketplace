@@ -1,5 +1,6 @@
 package com.example.sustainify
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,6 +61,8 @@ class ListingsFragment : Fragment() {
             addProductButton.visibility = View.VISIBLE
             addProductButton.setOnClickListener {
                 // Handle Add Product Button click
+                val intent = Intent(requireActivity(), AddProduct::class.java)
+                startActivity(intent)
             }
         } else {
             addProductButton.visibility = View.GONE
