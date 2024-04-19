@@ -84,21 +84,25 @@ Sustainify is a sustainable marketplace app. This is a marketplace where users c
 **Flow Navigation** (Screen to Screen)
 
 - Login Screen
-  - User can go to listings screen when submit button is clicked
+  - [x] User can go to listings screen when submit button is clicked
 - Product listings screen with filters button
-  - User can go to filters screen on clicking filters button
-  - User can go to product details screen when "see product" button is clicked
-  - User can go to add product screen
+  - [x] User can go to filters screen on clicking filters button
+  - [x] User can go to product details screen when "see product" button is clicked
+  - [x]User can go to add product screen
 - Filters Screen
-    - User can go back to product listings when filter popup is closed or filters form is submitted
+    - [x] User can go back to product listings when filter popup is closed or filters form is submitted
+    - User shuld be able to filter listing using firebase
 - Product description screen
-    - User can go back to product listings screen with back button
+    - [x] User can go back to product listings screen with back button
     - User can go to the chat feature/ communicate with seller
+    - Fetch data for each product from firebase
 - Add product screen
-    - User can go back to main screen once product is added
+    - [x] User can go back to main screen once product is added
+    - Product should be added to the list and database when submit is clicked
 - User profile details Screen
-    - User can go back to preferneces screen
-    - User can go back to homepage (Main product listing screen)
+    - [x] User can go back to preferneces screen
+    - [x] User can go back to homepage (Main product listing screen)
+    - User should be able to update the profile in database
 
 
 ## Wireframes
