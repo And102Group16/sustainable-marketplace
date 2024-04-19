@@ -7,5 +7,6 @@ data class Item(
     val images: List<String>,
     val pickupLocation: String,
     val seller: String,
-    val sellerAddress: String
+    val sellerAddress: String,
+    val contactInfo: String
 )

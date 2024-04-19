@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemsAdapter(private val items: List<Item>, private val role: String) :
+class ItemsAdapter(private val items: MutableList<Item>, private val role: String) :
     RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,6 +31,11 @@ class ItemsAdapter(private val items: List<Item>, private val role: String) :
         holder.viewMoreButton.setOnClickListener {
             // Handle view more button click
         }
+    }
+
+    fun addItem(item: Item) {
+        items.add(item)
+        notifyItemInserted(items.size - 1)
     }
 
     override fun getItemCount(): Int {

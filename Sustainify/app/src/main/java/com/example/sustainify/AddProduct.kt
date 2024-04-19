@@ -1,5 +1,6 @@
 package com.example.sustainify
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,6 +48,14 @@ class AddProduct : AppCompatActivity() {
             val contactInfo = contactInfoEditText.text.toString()
 
             // You can perform actions here like sending data to a server or storing it locally
+            // Pass data back to ListingsFragment
+            val intent = Intent().apply {
+                putExtra("itemName", itemName)
+                putExtra("setPrice", setPrice)
+                putExtra("pickUpLocation", pickUpLocation)
+                putExtra("contactInfo", contactInfo)
+            }
+            setResult(Activity.RESULT_OK, intent)
 
             // Clear EditText fields after submission
             itemNameEditText.text.clear()
@@ -56,6 +65,7 @@ class AddProduct : AppCompatActivity() {
 
             // Clear images array after submission
             images.clear()
+            finish()
         }
 
     }
