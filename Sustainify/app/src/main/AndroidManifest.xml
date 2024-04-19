@@ -24,6 +24,12 @@
         <activity
             android:name=".AddProduct"
             android:exported="true" />
+        <activity
+            android:name=".FilterItemsFragment"
+            android:exported="true" />
+        <activity
+            android:name=".ProductDetailFragment"
+            android:exported="true" />
     </application>
 
 </manifest>

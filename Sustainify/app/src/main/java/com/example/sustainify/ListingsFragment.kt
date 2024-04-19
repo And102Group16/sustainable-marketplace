@@ -11,12 +11,14 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 
 class ListingsFragment : Fragment() {
 
     private lateinit var itemsAdapter: ItemsAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var addProductButton: Button
+    private lateinit var applyFiltersBtn : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,8 @@ class ListingsFragment : Fragment() {
 
         // Initialize Add Product Button
         addProductButton = view.findViewById(R.id.buttonAddProduct)
+
+        applyFiltersBtn = view.findViewById(R.id.btnApplyFilters)
 
         // Example data (replace with your actual data)
         val items = mutableListOf(
@@ -57,6 +61,19 @@ class ListingsFragment : Fragment() {
             // Add more sample items as needed
         )
 
+        applyFiltersBtn.setOnClickListener {
+            // Create an Intent object
+            val intent = Intent(context, FilterItemsFragment::class.java)
+
+            // Add any extra data to the intent if needed
+//            intent.putExtra("key", value)
+
+            // Start the activity using the intent
+            startActivity(intent)
+
+//            changeFragment(FilterItemsFragment());
+        }
+
         // Example role (replace with actual role)
         val role = "seller"
 
@@ -73,10 +90,23 @@ class ListingsFragment : Fragment() {
         }
 
         // Initialize and set up the adapter
-        itemsAdapter = ItemsAdapter(items, role)
+        itemsAdapter = ItemsAdapter(items, role, requireActivity())
         recyclerView.adapter = itemsAdapter
 
         return view
+    }
+
+    fun changeFragment(newFragment: Fragment) {
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+
+        // Replace the current fragment with the new one
+        fragmentTransaction.replace(R.id.viewPager, newFragment)
+
+        // Optionally, you can add the transaction to the back stack
+        // fragmentTransaction.addToBackStack(null)
+
+        // Commit the transaction
+        fragmentTransaction.commit()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
