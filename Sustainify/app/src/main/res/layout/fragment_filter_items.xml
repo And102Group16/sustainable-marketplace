@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="28dp"
+    tools:context=".FilterItemsFragment"
+    android:background="#CAEAA5"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/searchRadiusSpanTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Radius"
+        android:textStyle="bold"
+        android:textSize="26dp"
+        android:paddingLeft="12dp"/>
+
+    <com.google.android.material.slider.Slider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        android:stepSize="2.0"
+        android:value="10.0"
+        />
+
+
+    <TextView
+        android:id="@+id/priceSpanTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textStyle="bold"
+        android:textSize="26dp"
+        android:paddingLeft="12dp"/>
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/rangeSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stepSize="10.0"
+        android:valueFrom="10.0"
+        android:valueTo="500.0"
+        app:values="@array/initial_range_slider_values" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply Filters"
+        android:layout_marginTop="32dp"
+        />
+
+
+</LinearLayout>
+
+
+
