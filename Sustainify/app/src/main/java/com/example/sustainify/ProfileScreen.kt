@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.groupproject.R
+import com.example.sustainify.R
 
 
 class ProfileScreen : AppCompatActivity() {
@@ -31,15 +31,6 @@ class ProfileScreen : AppCompatActivity() {
         billingAdd = findViewById(R.id.billingAdd)
         newPassword = findViewById(R.id.newPassword)
         updateProfileButton = findViewById(R.id.button3)
-
-        // Your code for handling views and actions goes here
-        buttonBuyer.setOnClickListener {
-            // Handle buyer button click
-        }
-
-        buttonSeller.setOnClickListener {
-            // Handle seller button click
-        }
 
         updateProfileButton.setOnClickListener {
             // Handle update profile button click
