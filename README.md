@@ -123,4 +123,29 @@ Sustainify is a sustainable marketplace app. This is a marketplace where users c
 
 ### [BONUS] Interactive Prototype
 
+
+<br>
+
+# Milestone 2 - Build Sprint 1 (Unit 8)
+
+## GitHub Project board
+
+[Add screenshot of your Project Board with three milestones visible in
+this section]
+<a href="https://ibb.co/D710RwB"><img src="https://i.ibb.co/GVdz5CZ/Screenshot-2024-04-19-at-3-57-19-PM.png" alt="Screenshot-2024-04-19-at-3-57-19-PM" border="0"></a> <br>
+<a href="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FpRh5OtFxnUPM2o0gufdflc%2FSustainify%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DIdbOe4zfT9s1FqFF-1" allowfullscreen>**Figma Wireframes**</a>
+
+## Issue cards
+
+- [Add screenshot of your Project Board with the issues that you've been working on for this unit's milestone] <br><a href="https://ibb.co/gt0DH4B"><img src="https://i.ibb.co/HGcr1hk/Screenshot-2024-04-19-at-3-51-08-PM.png" alt="Screenshot-2024-04-19-at-3-51-08-PM" border="0"></a>
+- [Add screenshot of your Project Board with the issues that you're working on in the **NEXT sprint**. It should include issues for next unit with assigned owners.]
+<br>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/myF4bBW/Screenshot-2024-04-19-at-3-56-10-PM.png" alt="Screenshot-2024-04-19-at-3-56-10-PM" border="0"></a> <br>
+<a href="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FpRh5OtFxnUPM2o0gufdflc%2FSustainify%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DIdbOe4zfT9s1FqFF-1" allowfullscreen>**Figma Wireframes**</a>
+
+## Issues worked on this sprint
+
+- [Completed Issues] (User Profile Screen, Add Product Screen,Filters Screen,Product Details Screen,Product Listing Screen,Tab Navigations,Signup Screen UI,Login Screen UI)
+- [Add giphy that shows current build progress for Milestone 2. Note: We will be looking for progression of work between Milestone 2 and 3. Make sure your giphys are not duplicated and clearly show the change from Sprint 1 to 2.]
+
 <br>
