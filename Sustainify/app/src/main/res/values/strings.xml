@@ -1,5 +1,21 @@
 <resources>
-    <string name="app_name">Sustainify</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+<string name="app_name">Sustainify</string>
+<string name="welcome_to_sustainify">Welcome to Sustainify!</string>
+<string name="login">Login</string>
+<string name="seller">Seller</string>
+<string name="buyer">Buyer</string>
+<string name="sign_up_register">Sign up/ register</string>
+<string name="password">Password</string>
+<string name="email">Email</string>
+<string name="sustainify">SUSTAINIFY</string>
+<string name="login_as">Login as:</string>
+<string name="name">Name</string>
+<string name="confirm_password">Confirm Password</string>
+<string name="phone">Phone</string>
+<string name="card_number">Card Number</string>
+<string name="card_cvc">Card CVC</string>
+<string name="billing_address">Billing Address</string>
+<string name="billing_address_question">Is billing address same as present address?</string>
+<string name="present_address">Present Address</string>
+<string name="sign_up">Sign Up</string>
 </resources>
