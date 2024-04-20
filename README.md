@@ -147,5 +147,6 @@ this section]
 
 - [Completed Issues] (User Profile Screen, Add Product Screen,Filters Screen,Product Details Screen,Product Listing Screen,Tab Navigations,Signup Screen UI,Login Screen UI)
 - [Add giphy that shows current build progress for Milestone 2. Note: We will be looking for progression of work between Milestone 2 and 3. Make sure your giphys are not duplicated and clearly show the change from Sprint 1 to 2.]
+  <a href="https://submissions.us-east-1.linodeobjects.com/and102/ol_0BN4G.gif" target="_blank">GIF</a>
 
 <br>
