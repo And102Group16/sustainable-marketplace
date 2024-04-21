@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "357528679591",
+    "firebase_url": "https://and102-sustainify-default-rtdb.firebaseio.com",
+    "project_id": "and102-sustainify",
+    "storage_bucket": "and102-sustainify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357528679591:android:bcb16034aa2f2d907d5782",
+        "android_client_info": {
+          "package_name": "com.example.sustainify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTEfMJAH8IGr2i381JDIQSn1cU6oxMQcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -115,7 +115,7 @@ class ListingsFragment : Fragment() {
         if (requestCode == ADD_PRODUCT_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Retrieve data from intent
             val heading = data?.getStringExtra("itemName")
-            val price = data?.getDoubleExtra("setPrice", 0.0)
+            val price = (data?.getStringExtra("setPrice")?:"0.0").toDouble()
             val pickupLocation = data?.getStringExtra("pickUpLocation")
             val contactInfo = data?.getStringExtra("contactInfo")
 
