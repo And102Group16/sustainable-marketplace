@@ -8,27 +8,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
-import android.content.ContentResolver
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
 import androidx.activity.result.PickVisualMediaRequest
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineScope
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import android.Manifest
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
-import com.google.firebase.firestore.firestore
+import android.widget.LinearLayout
+import com.bumptech.glide.Glide
 import java.lang.Exception
 
 class AddProduct : AppCompatActivity() {
@@ -71,11 +60,14 @@ class AddProduct : AppCompatActivity() {
         backButton = findViewById(R.id.backButton)
 
         addImageButton.setOnClickListener {
-//            openImagePicker()
-            pickImages()
-//            Log.d("Image picker ----- ", images.toString())
-            // TODO after the images are picked, display them after the plus sign in the same row
+            CoroutineScope(Dispatchers.Default).launch {
+                val imagesTemp = pickImages()
+                Log.d("Image picker ----- just got invoked", images.toString())
+                // TODO after the images are picked, display them in a horizontal scroll view
+                displayIntoGallery(imagesTemp)
+            }
         }
+
 
         backButton.setOnClickListener {
             finish()
@@ -90,6 +82,7 @@ class AddProduct : AppCompatActivity() {
             var imageUrlList: MutableList<String>
 
             CoroutineScope(Dispatchers.IO).launch {
+                submitButton.text = "Uploading..."
                 imageUrlList = addImageToFirebaseStorage(images)
                 Log.d("Image upload links", imageUrlList.toString())
 
@@ -109,8 +102,24 @@ class AddProduct : AppCompatActivity() {
 
     }
 
-    private fun pickImages() {
-            pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    private fun pickImages(): ArrayList<Uri> {
+        pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        return images
+    }
+
+    private fun displayIntoGallery(imagesTemp: ArrayList<Uri>) {
+        val imageGallery = findViewById<LinearLayout>(R.id.imageGallery)
+        Log.d("Image display into gallery - outside", images.toString())
+        for (image in imagesTemp){
+            Log.d("Image display into gallery - inside", images.toString())
+            val imageView = ImageView(this)
+            imageView.layoutParams = LinearLayout.LayoutParams(128, 128)
+            imageView.setPadding(8, 0, 8, 0)
+            Glide.with(this)
+                .load(image)
+                .into(imageView)
+            imageGallery.addView(imageView)
+        }
     }
 
     private suspend fun addImageToFirebaseStorage(localUris: ArrayList<Uri>): ArrayList<String> {
