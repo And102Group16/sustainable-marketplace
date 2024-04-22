@@ -160,19 +160,22 @@
 
     <HorizontalScrollView
         android:id="@+id/horizontalScroll"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="128dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_corner_box"
-        app:layout_constraintStart_toEndOf="@+id/addImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addImg"
         app:layout_constraintTop_toTopOf="@id/addImg">
 
         <LinearLayout
             android:id="@+id/imageGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal" />
     </HorizontalScrollView>
+
 
     <Button
         android:id="@+id/button"

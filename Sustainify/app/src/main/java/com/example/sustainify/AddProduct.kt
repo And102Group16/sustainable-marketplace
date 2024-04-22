@@ -10,6 +10,8 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
 import android.util.Log
+import android.view.View
+import android.widget.HorizontalScrollView
 import androidx.activity.result.PickVisualMediaRequest
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +19,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import java.lang.Exception
 
 class AddProduct : AppCompatActivity() {
@@ -28,18 +32,18 @@ class AddProduct : AppCompatActivity() {
     private lateinit var addImageButton: ImageView
     private lateinit var submitButton: Button
     private lateinit var backButton: ImageView
-
+    private lateinit var horizontalScroll: HorizontalScrollView
     private var images: ArrayList<Uri> = ArrayList()
 
 
     val pickMultipleMedia =
         registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(4)) { uris ->
-            // Callback is invoked after the user selects media items or closes the
-            // photo picker.
+            // Callback is invoked after the user selects media items or closes the photo picker.
             if (uris.isNotEmpty()) {
                 Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
-                images.clear()
+//                images.clear()
                 images.addAll(uris)
+                displayIntoGallery(images)
                 Log.d("Image picker picked -->", images.toString())
             } else {
                 Log.d("PhotoPicker", "No media selected")
@@ -58,12 +62,13 @@ class AddProduct : AppCompatActivity() {
         addImageButton = findViewById(R.id.addImg)
         submitButton = findViewById(R.id.button)
         backButton = findViewById(R.id.backButton)
+        horizontalScroll = findViewById(R.id.horizontalScroll)
+        horizontalScroll.visibility = View.GONE
 
         addImageButton.setOnClickListener {
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 val imagesTemp = pickImages()
                 Log.d("Image picker ----- just got invoked", images.toString())
-                // TODO after the images are picked, display them in a horizontal scroll view
                 displayIntoGallery(imagesTemp)
             }
         }
@@ -108,12 +113,18 @@ class AddProduct : AppCompatActivity() {
     }
 
     private fun displayIntoGallery(imagesTemp: ArrayList<Uri>) {
+        if (imagesTemp.isNotEmpty()) {
+            horizontalScroll.visibility = View.VISIBLE
+        }
         val imageGallery = findViewById<LinearLayout>(R.id.imageGallery)
         Log.d("Image display into gallery - outside", images.toString())
         for (image in imagesTemp){
             Log.d("Image display into gallery - inside", images.toString())
             val imageView = ImageView(this)
-            imageView.layoutParams = LinearLayout.LayoutParams(128, 128)
+            imageView.layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                400
+            )
             imageView.setPadding(8, 0, 8, 0)
             Glide.with(this)
                 .load(image)
