@@ -175,8 +175,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
     </HorizontalScrollView>
-
-
     <Button
         android:id="@+id/button"
         android:layout_width="136dp"

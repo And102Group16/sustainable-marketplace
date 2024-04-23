@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:background="#CAEAA5"
     tools:context=".ProductDetailFragment">
-
-
-
         <ImageView
             android:id="@+id/backButtonPd"
             android:layout_width="wrap_content"

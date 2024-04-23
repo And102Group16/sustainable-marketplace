@@ -11,7 +11,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
+import com.google.firebase.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 class ListingsFragment : Fragment() {
 
@@ -19,6 +24,10 @@ class ListingsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var addProductButton: Button
     private lateinit var applyFiltersBtn : Button
+
+    private val database = Firebase.database
+    private val productRef = database.getReference("product")
+    val databaseReference = FirebaseDatabase.getInstance().getReference("product")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,29 +46,30 @@ class ListingsFragment : Fragment() {
         applyFiltersBtn = view.findViewById(R.id.btnApplyFilters)
 
         // Example data (replace with your actual data)
-        val items = mutableListOf(
-            Item(
-                "Wooden Chair",
-                "A small wooden chair some 2 years old",
-                10.0,
-                listOf("image1.jpg"),
-                "450 Lindbergh Place NE",
-                "Mahima Sharma",
-                "450 Lindbergh Place NE",
-                ""
-            ),
-            Item(
-                "Solid black desk",
-                "A solid black standing desk",
-                20.0,
-                listOf("image2.jpg"),
-                "50 Lindbergh Place NE",
-                "Banu",
-                "50 Lindbergh Place NE",
-                ""
-            )
-            // Add more sample items as needed
-        )
+        val items = mutableListOf<Item>()
+
+        // Add a listener to fetch data from Firebase
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Clear existing items
+                items.clear()
+
+                // Iterate through the dataSnapshot and populate the items list
+                for (dataSnapshot in snapshot.children) {
+                    val item = dataSnapshot.getValue(Item::class.java)
+                    item?.let {
+                        items.add(it)
+                    }
+                }
+
+                // Notify the adapter that the data set has changed
+                itemsAdapter.notifyItemRangeInserted(0,snapshot.childrenCount.toInt())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle onCancelled event if needed
+            }
+        })
 
         applyFiltersBtn.setOnClickListener {
             // Create an Intent object
@@ -115,12 +125,12 @@ class ListingsFragment : Fragment() {
         if (requestCode == ADD_PRODUCT_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Retrieve data from intent
             val heading = data?.getStringExtra("itemName")
-            val price = (data?.getStringExtra("setPrice")?:"0.0").toDouble()
+            val price = (data?.getStringExtra("setPrice")?:"0.0")
             val pickupLocation = data?.getStringExtra("pickUpLocation")
             val contactInfo = data?.getStringExtra("contactInfo")
 
             // Create new item and add it to the list
-            val newItem = Item(heading ?: "", "", price ?: 0.0, listOf(), pickupLocation ?: "", "", "", contactInfo ?: "")
+            val newItem = Item(heading ?: "", "", price, ArrayList<String>() , pickupLocation ?: "", "")
             itemsAdapter.addItem(newItem) // You need to implement this method in your ItemsAdapter
         }
     }

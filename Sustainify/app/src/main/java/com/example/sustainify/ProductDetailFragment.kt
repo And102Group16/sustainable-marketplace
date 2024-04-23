@@ -25,7 +25,6 @@ class ProductDetailFragment : AppCompatActivity() {
             // Close the current activity and return to the previous one
             finish()
         }
-
         val imageGallery = findViewById<LinearLayout>(R.id.imageGallery)
         val images = emptyList<String>() // TODO retrieve images from the object passed to this activity
 

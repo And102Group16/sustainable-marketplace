@@ -18,22 +18,22 @@
         android:layout_marginTop="40dp" />
 
     <TextView
-        android:id="@+id/tvEmail"
+        android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_alignStart="@id/etEmail"
-        android:text="@string/email"
+        android:layout_alignStart="@id/etUsername"
+        android:text="Username"
         android:fontFamily="@font/inika_regular"
         android:textSize="24sp"
         android:textColor="@color/black"
         android:layout_marginTop="32dp" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etUsername"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvEmail"
+        android:layout_below="@+id/tvUsername"
         android:layout_marginTop="12dp"
         android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress"
@@ -44,7 +44,7 @@
         android:id="@+id/tvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etEmail"
+        android:layout_below="@+id/etUsername"
         android:layout_alignStart="@id/etPassword"
         android:text="@string/password"
         android:fontFamily="@font/inika_regular"

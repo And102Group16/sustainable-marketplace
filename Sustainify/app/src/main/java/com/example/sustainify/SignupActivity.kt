@@ -1,8 +1,11 @@
 package com.example.sustainify
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class SignupActivity : AppCompatActivity() {
@@ -15,7 +18,7 @@ class SignupActivity : AppCompatActivity() {
 
             btnSignup.setOnClickListener {
             // Handle Add Product Button click
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }

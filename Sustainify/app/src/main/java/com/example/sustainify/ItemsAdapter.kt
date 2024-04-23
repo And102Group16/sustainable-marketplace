@@ -46,4 +46,10 @@ class ItemsAdapter(private val items: MutableList<Item>, private val role: Strin
     override fun getItemCount(): Int {
         return items.size
     }
+
+    companion object {
+        fun notifyItemRangeInserted(adapter: RecyclerView.Adapter<*>, positionStart: Int, itemCount: Int) {
+            adapter.notifyItemRangeInserted(positionStart, itemCount)
+        }
+    }
 }

@@ -13,17 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        firebaseWriteTest()
-
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish() // Close this activity
         }, splashTimeOut)
     }
-
-
     private fun firebaseWriteTest(){
         val db = Firebase.database
         val ref = db.getReference("listings")
