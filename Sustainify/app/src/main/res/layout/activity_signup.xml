@@ -37,6 +37,7 @@
             android:textSize="24sp"
             android:textColor="@color/black" />
 
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="300dp"
@@ -48,10 +49,33 @@
             android:background="@drawable/input_field_background"
             android:padding="12dp" />
 
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_below="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etName"
+            android:text="Username"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUsername"
+            android:inputType="textPersonName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
         <!-- Email Field -->
         <TextView
             android:id="@+id/tvEmail"
-            android:layout_below="@+id/etName"
+            android:layout_below="@+id/etUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"

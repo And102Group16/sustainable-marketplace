@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:background="#CAEAA5"
     tools:context=".ProductDetailFragment">
-
-
-
         <ImageView
             android:id="@+id/backButtonPd"
             android:layout_width="wrap_content"
@@ -118,31 +115,18 @@
         </HorizontalScrollView>
 
 
-        <!-- Box-like region with rounded corners -->
-        <LinearLayout
+        <TextView
             android:id="@+id/descriptionTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_corner_box"
-            android:orientation="vertical"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:text="This is the description of the product. It might include more text than snown here"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScroll"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/horizontalScroll">
-
-            <!-- Text view inside the box -->
-            <TextView
-                android:id="@+id/boxText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="This is the description of the product. It might include more text than snown here"
-                android:textSize="18sp" />
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <View
