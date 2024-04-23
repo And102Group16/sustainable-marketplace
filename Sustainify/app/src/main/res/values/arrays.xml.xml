@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="initial_range_slider_values">
+        <item>100.0</item>
+        <item>200.0</item>
+    </array>
+
+    <array name="initial_slider_values">
+        <item>10.0</item>
+    </array>
+
+</resources>

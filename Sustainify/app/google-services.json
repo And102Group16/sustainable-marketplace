@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "507772267177",
+    "project_id": "login-sustainify",
+    "storage_bucket": "login-sustainify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507772267177:android:399e5e52cff8c0a2c357b8",
+        "android_client_info": {
+          "package_name": "com.example.sustainify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdJvopq5_8OZvZgEPou3dhUZNrKufjt5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
