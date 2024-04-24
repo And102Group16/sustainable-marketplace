@@ -1,24 +1,32 @@
 package com.example.sustainify
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
+import android.os.Handler
+import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 class MainActivity : AppCompatActivity() {
-
+    private val splashTimeOut: Long = 100 // 3000 // 3 seconds
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewPager: ViewPager = findViewById(R.id.viewPager)
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout)
+//        firebaseWriteTest()
 
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListingsFragment(), "Listings")
-        adapter.addFragment(ProfileFragment(), "Profile")
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish() // Close this activity
+        }, splashTimeOut)
+    }
 
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
+
+    private fun firebaseWriteTest(){
+        val db = Firebase.database
+        val ref = db.getReference("listings")
+        ref.setValue("Testing listing entry")
     }
 }

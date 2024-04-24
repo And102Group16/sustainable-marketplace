@@ -1,5 +1,6 @@
 package com.example.sustainify
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import android.net.Uri
+import android.util.Log
+import android.view.View
+import android.widget.HorizontalScrollView
+import androidx.activity.result.PickVisualMediaRequest
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import java.lang.Exception
 
 class AddProduct : AppCompatActivity() {
     private lateinit var itemNameEditText: EditText
@@ -16,12 +32,28 @@ class AddProduct : AppCompatActivity() {
     private lateinit var addImageButton: ImageView
     private lateinit var submitButton: Button
     private lateinit var backButton: ImageView
+    private lateinit var horizontalScroll: HorizontalScrollView
+    private var images: ArrayList<Uri> = ArrayList()
 
-    private var images: ArrayList<String> = ArrayList()
+
+    val pickMultipleMedia =
+        registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(4)) { uris ->
+            // Callback is invoked after the user selects media items or closes the photo picker.
+            if (uris.isNotEmpty()) {
+                Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
+//                images.clear()
+                images.addAll(uris)
+                displayIntoGallery(images)
+                Log.d("Image picker picked -->", images.toString())
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_product)
+
 
         itemNameEditText = findViewById(R.id.itemName)
         setPriceEditText = findViewById(R.id.setprice)
@@ -30,13 +62,19 @@ class AddProduct : AppCompatActivity() {
         addImageButton = findViewById(R.id.addImg)
         submitButton = findViewById(R.id.button)
         backButton = findViewById(R.id.backButton)
+        horizontalScroll = findViewById(R.id.horizontalScroll)
+        horizontalScroll.visibility = View.GONE
 
         addImageButton.setOnClickListener {
-            openImagePicker()
+            CoroutineScope(Dispatchers.IO).launch {
+                val imagesTemp = pickImages()
+                Log.d("Image picker ----- just got invoked", images.toString())
+                displayIntoGallery(imagesTemp)
+            }
         }
 
+
         backButton.setOnClickListener {
-            // Close the current activity and return to the previous one
             finish()
         }
 
@@ -46,18 +84,74 @@ class AddProduct : AppCompatActivity() {
             val pickUpLocation = pickUpLocationEditText.text.toString()
             val contactInfo = contactInfoEditText.text.toString()
 
-            // You can perform actions here like sending data to a server or storing it locally
+            var imageUrlList: MutableList<String>
 
-            // Clear EditText fields after submission
-            itemNameEditText.text.clear()
-            setPriceEditText.text.clear()
-            pickUpLocationEditText.text.clear()
-            contactInfoEditText.text.clear()
+            CoroutineScope(Dispatchers.IO).launch {
+                submitButton.text = "Uploading..."
+                imageUrlList = addImageToFirebaseStorage(images)
+                Log.d("Image upload links", imageUrlList.toString())
 
-            // Clear images array after submission
-            images.clear()
+                val intent = Intent().apply {
+                    putExtra("itemName", itemName)
+                    putExtra("setPrice", setPrice)
+                    putExtra("pickUpLocation", pickUpLocation)
+                    putExtra("contactInfo", contactInfo)
+                    // TODO split the urls by comma
+                    putExtra("imageUrls", imageUrlList.toString())
+                }
+                setResult(Activity.RESULT_OK, intent)
+                images.clear()
+                finish()
+            }
         }
 
+    }
+
+    private fun pickImages(): ArrayList<Uri> {
+        pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        return images
+    }
+
+    private fun displayIntoGallery(imagesTemp: ArrayList<Uri>) {
+        if (imagesTemp.isNotEmpty()) {
+            horizontalScroll.visibility = View.VISIBLE
+        }
+        val imageGallery = findViewById<LinearLayout>(R.id.imageGallery)
+        Log.d("Image display into gallery - outside", images.toString())
+        for (image in imagesTemp){
+            Log.d("Image display into gallery - inside", images.toString())
+            val imageView = ImageView(this)
+            imageView.layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                400
+            )
+            imageView.setPadding(8, 0, 8, 0)
+            Glide.with(this)
+                .load(image)
+                .into(imageView)
+            imageGallery.addView(imageView)
+        }
+    }
+
+    private suspend fun addImageToFirebaseStorage(localUris: ArrayList<Uri>): ArrayList<String> {
+        val result = ArrayList<String>()
+        val timeStamp = System.currentTimeMillis().toString()
+        val storageRef = FirebaseStorage.getInstance().getReference("images").child(timeStamp)
+
+        localUris.forEach{localUri ->
+            try {
+                val downloadUrl = storageRef
+                    .putFile(localUri).await()
+                    .storage.downloadUrl.await()
+                downloadUrl?.let {
+                    result.add(downloadUrl.toString())
+                }
+            } catch (e: Exception){
+                Log.d("Image Upload Failed", localUri.toString())
+            }
+        }
+
+        return result
     }
 
     private val imagePickerLauncher =
@@ -67,7 +161,8 @@ class AddProduct : AppCompatActivity() {
                 val selectedImageUri = result.data?.data
                 selectedImageUri?.let {
                     // Add the image URI to the list
-                    images.add(it.toString())
+                    Log.d("Picked image", it.toString())
+                    images.add(it)
                 }
             }
         }
@@ -78,4 +173,5 @@ class AddProduct : AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         imagePickerLauncher.launch(Intent.createChooser(intent, "Select Picture"))
     }
+
 }

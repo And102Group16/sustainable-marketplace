@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+<!--    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />-->
 
     <application
         android:allowBackup="true"
@@ -22,8 +27,26 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddProduct"
             android:exported="true" />
+        <activity
+            android:name=".FilterItemsFragment"
+            android:exported="true" />
+        <activity
+            android:name=".ProductDetailFragment"
+            android:exported="true" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".SignupActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
