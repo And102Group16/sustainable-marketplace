@@ -1,5 +1,7 @@
 package com.example.sustainify
 
+import java.io.Serializable
+
 data class Item(
     val heading: String = "",
     val description: String = "",
@@ -9,4 +11,4 @@ data class Item(
     val seller: String = ""
    // val sellerAddress: String,
     // val contactInfo: String
-)
+) : Serializable
