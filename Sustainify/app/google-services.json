@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1021658483682",
+    "firebase_url": "https://sustainify-login-firebase-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "sustainify-login-firebase",
+    "storage_bucket": "sustainify-login-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021658483682:android:cea6855a59c601a8d0c7bb",
+        "android_client_info": {
+          "package_name": "com.example.sustainify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0Z5RTfOT0S_-_AQhK8mKVULZBloUWZO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
