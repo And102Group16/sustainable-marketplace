@@ -34,6 +34,7 @@ class ItemsAdapter(private val items: MutableList<Item>, private val role: Strin
         holder.viewMoreButton.setOnClickListener {
             // Handle view more button click
             val intent = Intent(context, ProductDetailFragment::class.java)
+            intent.putExtra("item", item)
             context.startActivity(intent)
         }
     }

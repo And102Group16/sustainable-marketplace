@@ -29,6 +29,7 @@ import java.util.UUID;
 
 class AddProduct : AppCompatActivity() {
     private lateinit var itemNameEditText: EditText
+    private lateinit var itemDescriptionEditText: EditText
     private lateinit var setPriceEditText: EditText
     private lateinit var pickUpLocationEditText: EditText
     private lateinit var contactInfoEditText: EditText
@@ -63,6 +64,7 @@ class AddProduct : AppCompatActivity() {
 
 
         itemNameEditText = findViewById(R.id.itemName)
+        itemDescriptionEditText = findViewById(R.id.etItemDescription)
         setPriceEditText = findViewById(R.id.setprice)
         pickUpLocationEditText = findViewById(R.id.pickUp)
         contactInfoEditText = findViewById(R.id.contactInfo)
@@ -91,6 +93,7 @@ class AddProduct : AppCompatActivity() {
             val setPrice = setPriceEditText.text.toString()
             val pickUpLocation = pickUpLocationEditText.text.toString()
             val contactInfo = contactInfoEditText.text.toString()
+            val itemDescription = itemDescriptionEditText.text.toString()
 
             var imageUrlList: MutableList<String>
 
@@ -103,7 +106,7 @@ class AddProduct : AppCompatActivity() {
                 val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 val username = sharedPreferences.getString("username", "")
 
-                val product = Item(itemName, "", setPrice,
+                val product = Item(itemName, itemDescription, setPrice,
                     imageUrlList as ArrayList<String>,pickUpLocation, contactInfo)
                 writeProductToFirebase(product)
 
@@ -117,6 +120,7 @@ class AddProduct : AppCompatActivity() {
                     putExtra("pickUpLocation", pickUpLocation)
                     putExtra("contactInfo", contactInfo)
                     // TODO split the urls by comma
+                    putExtra("description",itemDescription.toString())
                     putExtra("imageUrls", imageUrlList.toString())
                 }
                 setResult(Activity.RESULT_OK, intent)

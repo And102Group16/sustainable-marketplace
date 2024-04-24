@@ -125,12 +125,13 @@ class ListingsFragment : Fragment() {
         if (requestCode == ADD_PRODUCT_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Retrieve data from intent
             val heading = data?.getStringExtra("itemName")
+            val description = data?.getStringExtra("itemDescription")
             val price = (data?.getStringExtra("setPrice")?:"0.0")
             val pickupLocation = data?.getStringExtra("pickUpLocation")
             val contactInfo = data?.getStringExtra("contactInfo")
 
             // Create new item and add it to the list
-            val newItem = Item(heading ?: "", "", price, ArrayList<String>() , pickupLocation ?: "", "")
+            val newItem = Item(heading ?: "", description ?: "", price, ArrayList<String>() , pickupLocation ?: "", "")
             itemsAdapter.addItem(newItem) // You need to implement this method in your ItemsAdapter
         }
     }
