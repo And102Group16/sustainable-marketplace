@@ -1,64 +1,108 @@
 package com.example.sustainify
 
 import android.content.Context
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Radio
+import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginButton: Button
+    private lateinit var edtEmail: EditText
+    private lateinit var edtPassword: EditText
+    private lateinit var auth: FirebaseAuth
+
     private lateinit var signupText: TextView
     private lateinit var rgLoginType : RadioGroup
-    var selectedOption: String = ""
+    private var selectedOption: String = ""
+
 
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         loginButton = findViewById(R.id.btnLogin)
+        edtEmail = findViewById(R.id.etEmail)
+        edtPassword = findViewById(R.id.etPassword)
+        auth = FirebaseAuth.getInstance()
+
         signupText = findViewById(R.id.tvSignUp)
         rgLoginType = findViewById(R.id.rgLoginType)
 
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val usernameEditText = findViewById<EditText>(R.id.etUsername)
+        // Load saved login type
+        when (SharedPreferencesManager.getUserData(this)["LoginType"]) {
+            "buyer" -> rgLoginType.check(R.id.rbBuyer)
+            "seller" -> rgLoginType.check(R.id.rbSeller)
+        }
 
-        rgLoginType.setOnCheckedChangeListener { group, checkedId ->
+        // Login type selection
+        rgLoginType.setOnCheckedChangeListener { _, checkedId ->
             selectedOption = when (checkedId) {
                 R.id.rbBuyer -> "buyer"
                 R.id.rbSeller -> "seller"
-                else -> "" // Handle default case if needed
+                else -> ""
             }
         }
 
+        // Login button click listener
         loginButton.setOnClickListener {
-            // Handle Add Product Button click
+            val email = edtEmail.text.toString().trim()
+            val password = edtPassword.text.toString().trim()
 
-            //store username in shared preferences
-            val username = usernameEditText.text.toString().trim()
+            if (email.isEmpty() || password.isEmpty()) {
+                if (email.isEmpty()) Toast.makeText(this, "Enter email", Toast.LENGTH_SHORT).show()
+                if (password.isEmpty()) Toast.makeText(this, "Enter password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            // Store username in SharedPreferences
-            val editor = sharedPreferences.edit()
-            editor.putString("username", username)
-            editor.apply()
-
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("loginType", selectedOption)
-            startActivity(intent)
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                    SharedPreferencesManager.saveUserData(this, "", email, "", "", "", "", selectedOption) // Save only non-sensitive data and login type
+                    navigateToHome()
+                } else {
+                    // Handle errors
+                    val errorCode = (task.exception as FirebaseAuthException).errorCode
+                    handleError(errorCode)
+                }
+            }
         }
 
+        // Navigate to SignUp Activity
         signupText.setOnClickListener {
-            // Handle Add Product Button click
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignupActivity::class.java))
         }
+    }
+
+    private fun handleError(errorCode: String) {
+        val message = when (errorCode) {
+            "ERROR_INVALID_EMAIL" -> "The email address is badly formatted."
+            "ERROR_WRONG_PASSWORD" -> "The password is incorrect."
+            "ERROR_USER_NOT_FOUND" -> "There is no user corresponding to the email address."
+            "ERROR_USER_DISABLED" -> "The user account has been disabled by an administrator."
+            "ERROR_TOO_MANY_REQUESTS" -> "Too many attempts to sign in as this user."
+            else -> "Authentication failed."
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        Log.w(TAG, "signInWithEmail:failure $errorCode")
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("loginType", selectedOption)
+        startActivity(intent)
+        finish()
     }
 }

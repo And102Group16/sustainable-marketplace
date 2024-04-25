@@ -24,6 +24,7 @@ class ListingsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var addProductButton: Button
     private lateinit var applyFiltersBtn : Button
+    private lateinit var roleButton : Button
 
     private val database = Firebase.database
     private val productRef = database.getReference("product")
@@ -44,6 +45,7 @@ class ListingsFragment : Fragment() {
         addProductButton = view.findViewById(R.id.buttonAddProduct)
 
         applyFiltersBtn = view.findViewById(R.id.btnApplyFilters)
+        roleButton = view.findViewById(R.id.btnRoleBuyer)
 
         // Example data (replace with your actual data)
         val items = mutableListOf<Item>()
@@ -85,7 +87,8 @@ class ListingsFragment : Fragment() {
         }
 
         // Example role (replace with actual role)
-        val role = "seller"
+        val role = arguments?.getString("loginType") ?: "seller"
+        roleButton.text = "Role: " + role
 
         // Show Add Product Button only for sellers
         if (role == "seller") {

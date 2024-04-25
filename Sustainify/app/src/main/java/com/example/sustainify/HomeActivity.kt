@@ -11,12 +11,21 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-//        val viewPager: ViewPager = findViewById(R.id.viewPager)
         val viewPager: ViewPager = findViewById(R.id.viewPager)
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
 
+        // Retrieve loginType from intent
+        val loginType = intent.getStringExtra("loginType")
+
+        // Pass loginType to ListingsFragment
+        val listingsFragment = ListingsFragment().apply {
+            arguments = Bundle().apply {
+                putString("loginType", loginType)
+            }
+        }
+
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListingsFragment(), "Listings")
+        adapter.addFragment(listingsFragment, "Listings")
         adapter.addFragment(ProfileFragment(), "Profile")
 
         viewPager.adapter = adapter
