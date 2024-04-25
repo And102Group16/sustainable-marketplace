@@ -2,38 +2,42 @@ package com.example.sustainify
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import java.lang.Exception
 
 class AddProduct : AppCompatActivity() {
     private lateinit var itemNameEditText: EditText
     private lateinit var setPriceEditText: EditText
-    private lateinit var pickUpLocationEditText: EditText
+    private lateinit var pickUpLocationButton: Button
     private lateinit var contactInfoEditText: EditText
     private lateinit var addImageButton: ImageView
     private lateinit var submitButton: Button
     private lateinit var backButton: ImageView
     private lateinit var horizontalScroll: HorizontalScrollView
     private var images: ArrayList<Uri> = ArrayList()
+
+    private val REQUEST_CODE = 100
+    private var pickupLatLng = ""
+    private var pickupAddress = ""
+
 
 
     val pickMultipleMedia =
@@ -57,7 +61,7 @@ class AddProduct : AppCompatActivity() {
 
         itemNameEditText = findViewById(R.id.itemName)
         setPriceEditText = findViewById(R.id.setprice)
-        pickUpLocationEditText = findViewById(R.id.pickUp)
+        pickUpLocationButton = findViewById(R.id.pickUp)
         contactInfoEditText = findViewById(R.id.contactInfo)
         addImageButton = findViewById(R.id.addImg)
         submitButton = findViewById(R.id.button)
@@ -81,7 +85,8 @@ class AddProduct : AppCompatActivity() {
         submitButton.setOnClickListener {
             val itemName = itemNameEditText.text.toString()
             val setPrice = setPriceEditText.text.toString()
-            val pickUpLocation = pickUpLocationEditText.text.toString()
+//            val pickUpLocation = pickUpLocationButton.text.toString()
+            val pickUpLocation = pickupLatLng
             val contactInfo = contactInfoEditText.text.toString()
 
             var imageUrlList: MutableList<String>
@@ -105,6 +110,11 @@ class AddProduct : AppCompatActivity() {
             }
         }
 
+        val launchMapButton = findViewById<Button>(R.id.pickUp)
+        launchMapButton.setOnClickListener{
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE)
+        }
     }
 
     private fun pickImages(): ArrayList<Uri> {
@@ -172,6 +182,28 @@ class AddProduct : AppCompatActivity() {
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         imagePickerLauncher.launch(Intent.createChooser(intent, "Select Picture"))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    // Extract any data passed back from the activity
+                    pickupLatLng = data?.getStringExtra("pickupLatLng")?:pickupLatLng
+                    pickupAddress = data?.getStringExtra("pickupAddress")?:pickupLatLng
+                    Log.d("Location received back", pickupLatLng)
+                    Log.d("Location received back", pickupAddress)
+
+                    Toast.makeText(this, "$pickupLatLng", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "$pickupAddress", Toast.LENGTH_SHORT).show()
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Failed to receive location", Toast.LENGTH_SHORT).show()
+            }
+        }
+        pickupLatLng = data?.getStringExtra("pickupLatLng")?:pickupLatLng
+        Log.d("Location received back", pickupLatLng)
     }
 
 }
