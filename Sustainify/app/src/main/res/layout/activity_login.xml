@@ -22,15 +22,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
-        android:layout_alignStart="@id/etUsername"
-        android:text="Username"
+        android:layout_alignStart="@id/etEmail"
+        android:text="Email"
         android:fontFamily="@font/inika_regular"
         android:textSize="24sp"
         android:textColor="@color/black"
         android:layout_marginTop="32dp" />
 
     <EditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUsername"
@@ -44,7 +44,7 @@
         android:id="@+id/tvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etUsername"
+        android:layout_below="@+id/etEmail"
         android:layout_alignStart="@id/etPassword"
         android:text="@string/password"
         android:fontFamily="@font/inika_regular"

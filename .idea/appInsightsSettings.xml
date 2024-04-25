@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.sustainify" />
-                  <option name="mobileSdkAppId" value="1:1021658483682:android:cea6855a59c601a8d0c7bb" />
-                  <option name="projectId" value="sustainify-login-firebase" />
-                  <option name="projectNumber" value="1021658483682" />
+                  <option name="appId" value="PLACEHOLDER" />
+                  <option name="mobileSdkAppId" value="" />
+                  <option name="projectId" value="" />
+                  <option name="projectNumber" value="" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
