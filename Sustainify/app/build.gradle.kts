@@ -48,7 +48,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("com.google.android.material:material:1.11.0")
-
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
     // When using bom(bill of materials), do not specify version the firebase libraries
     implementation("com.google.firebase:firebase-auth")
@@ -60,6 +59,4 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
-
 }

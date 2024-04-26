@@ -1,6 +1,7 @@
 package com.example.sustainify
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,8 +22,10 @@ import kotlinx.coroutines.tasks.await
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import java.lang.Exception
+import java.util.UUID;
 
 class AddProduct : AppCompatActivity() {
     private lateinit var itemNameEditText: EditText
@@ -32,8 +35,12 @@ class AddProduct : AppCompatActivity() {
     private lateinit var addImageButton: ImageView
     private lateinit var submitButton: Button
     private lateinit var backButton: ImageView
+
     private lateinit var horizontalScroll: HorizontalScrollView
     private var images: ArrayList<Uri> = ArrayList()
+
+    private val database = Firebase.database
+    private val productRef = database.getReference("product")
 
 
     val pickMultipleMedia =
@@ -62,6 +69,7 @@ class AddProduct : AppCompatActivity() {
         addImageButton = findViewById(R.id.addImg)
         submitButton = findViewById(R.id.button)
         backButton = findViewById(R.id.backButton)
+
         horizontalScroll = findViewById(R.id.horizontalScroll)
         horizontalScroll.visibility = View.GONE
 
@@ -91,6 +99,18 @@ class AddProduct : AppCompatActivity() {
                 imageUrlList = addImageToFirebaseStorage(images)
                 Log.d("Image upload links", imageUrlList.toString())
 
+                //store product details in database
+                val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                val username = sharedPreferences.getString("username", "")
+
+                val product = Item(itemName, "", setPrice,
+                    imageUrlList as ArrayList<String>,pickUpLocation, contactInfo)
+                writeProductToFirebase(product)
+
+                if (username != null) {
+                    Log.i("Username is ",username)
+                }
+
                 val intent = Intent().apply {
                     putExtra("itemName", itemName)
                     putExtra("setPrice", setPrice)
@@ -106,10 +126,22 @@ class AddProduct : AppCompatActivity() {
         }
 
     }
-
     private fun pickImages(): ArrayList<Uri> {
         pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         return images
+    }
+
+    private fun writeProductToFirebase(product: Item) {
+        val productKey = productRef.push().key
+        productKey?.let {
+            productRef.child(it).setValue(product)
+                .addOnSuccessListener {
+                    Log.d("Firebase", "Product added successfully")
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firebase", "Error adding product", e)
+                }
+        }
     }
 
     private fun displayIntoGallery(imagesTemp: ArrayList<Uri>) {
@@ -136,11 +168,11 @@ class AddProduct : AppCompatActivity() {
     private suspend fun addImageToFirebaseStorage(localUris: ArrayList<Uri>): ArrayList<String> {
         val result = ArrayList<String>()
         val timeStamp = System.currentTimeMillis().toString()
-        val storageRef = FirebaseStorage.getInstance().getReference("images").child(timeStamp)
+        val storageRef = FirebaseStorage.getInstance().getReference("images")
 
         localUris.forEach{localUri ->
             try {
-                val downloadUrl = storageRef
+                val downloadUrl = storageRef.child(timeStamp + UUID.randomUUID().toString())
                     .putFile(localUri).await()
                     .storage.downloadUrl.await()
                 downloadUrl?.let {
@@ -173,5 +205,4 @@ class AddProduct : AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         imagePickerLauncher.launch(Intent.createChooser(intent, "Select Picture"))
     }
-
 }

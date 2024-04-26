@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CAEAA5"
     tools:context=".HomeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/itemHeading"
@@ -41,6 +45,17 @@
         app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Item Description:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,9 +64,10 @@
         android:text="Set Price:"
         app:layout_constraintBottom_toTopOf="@+id/setprice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemName"
-        app:layout_constraintVertical_bias="0.512" />
+        app:layout_constraintTop_toBottomOf="@+id/etItemDescription"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -103,6 +119,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
     <EditText
+        android:id="@+id/etItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="itemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+
+    <EditText
         android:id="@+id/pickUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,10 +165,10 @@
         android:id="@+id/setprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="144dp"
         android:ems="10"
-        android:text="20"
         android:inputType="number"
+        android:text="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +195,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_corner_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/addImg"
         app:layout_constraintTop_toTopOf="@id/addImg">
 
@@ -176,7 +206,6 @@
             android:orientation="horizontal" />
     </HorizontalScrollView>
 
-
     <Button
         android:id="@+id/button"
         android:layout_width="136dp"
@@ -184,6 +213,7 @@
         android:layout_marginStart="137dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="138dp"
+        android:layout_marginBottom="100dp"
         android:background="@color/material_dynamic_primary90"
         android:text="Submit"
         android:textColorHighlight="#4CAF50"
@@ -193,4 +223,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactInfo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
