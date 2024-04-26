@@ -41,7 +41,7 @@ class ItemsAdapter(private val items: MutableList<Item>, private val role: Strin
 
     fun addItem(item: Item) {
         items.add(item)
-        notifyItemInserted(items.size - 1)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
