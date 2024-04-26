@@ -38,7 +38,7 @@
             android:name=".AddProduct"
             android:exported="true" />
         <activity
-            android:name=".FilterItemsFragment"
+            android:name=".FilterItemsActivity"
             android:exported="true" />
         <activity
             android:name=".ProductDetailFragment"

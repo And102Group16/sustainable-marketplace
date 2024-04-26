@@ -75,7 +75,7 @@ class ListingsFragment : Fragment() {
 
         applyFiltersBtn.setOnClickListener {
             // Create an Intent object
-            val intent = Intent(context, FilterItemsFragment::class.java)
+            val intent = Intent(context, FilterItemsActivity::class.java)
 
             // Add any extra data to the intent if needed
 //            intent.putExtra("key", value)
@@ -137,10 +137,21 @@ class ListingsFragment : Fragment() {
             val newItem = Item(heading ?: "", description ?: "", price, ArrayList<String>() , pickupLocation ?: "", "")
             itemsAdapter.addItem(newItem) // You need to implement this method in your ItemsAdapter
         }
+        else if (requestCode == PRICE_FILTER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Retrieve data from intent
+            val maxPrice = data?.getStringExtra("maxPrice")
+
+
+            // Create new item and add it to the list
+//            val newItem = Item(heading ?: "", description ?: "", price, ArrayList<String>() , pickupLocation ?: "", "")
+//            itemsAdapter.addItem(newItem) // You need to implement this method in your ItemsAdapter
+        }
+
     }
 
     companion object {
         private const val ADD_PRODUCT_REQUEST_CODE = 1001
+        private const val PRICE_FILTER_REQUEST_CODE = 1002
     }
 }
 

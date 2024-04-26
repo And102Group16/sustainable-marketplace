@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +38,7 @@ class AddProduct : AppCompatActivity() {
     private lateinit var addImageButton: ImageView
     private lateinit var submitButton: Button
     private lateinit var backButton: ImageView
+    private lateinit var pickupAddressTextView: TextView
 
     private lateinit var horizontalScroll: HorizontalScrollView
     private var images: ArrayList<Uri> = ArrayList()
@@ -74,7 +76,7 @@ class AddProduct : AppCompatActivity() {
         addImageButton = findViewById(R.id.addImg)
         submitButton = findViewById(R.id.button)
         backButton = findViewById(R.id.backButton)
-
+        pickupAddressTextView = findViewById(R.id.chosenPickupLocationTextView)
         horizontalScroll = findViewById(R.id.horizontalScroll)
         horizontalScroll.visibility = View.GONE
 
@@ -228,7 +230,7 @@ class AddProduct : AppCompatActivity() {
                     pickupAddress = data?.getStringExtra("pickupAddress")?:pickupLatLng
                     Log.d("Location received back", pickupLatLng)
                     Log.d("Location received back", pickupAddress)
-
+                    pickupAddressTextView.text = pickupAddress
                     Toast.makeText(this, "$pickupLatLng", Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, "$pickupAddress", Toast.LENGTH_SHORT).show()
                 }
