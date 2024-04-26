@@ -83,7 +83,7 @@ class SignupActivity : AppCompatActivity() {
                     // Save user data locally
                     SharedPreferencesManager.saveUserData(this, name, email, phone, cardNumber, cardCVC, billingAddress, presentAddress)
                     // Write data to the file immediately after saving to SharedPreferences
-                    // SharedPreferencesManager.writeUserDataToFile(this)
+                    SharedPreferencesManager.writeUserDataToFile(this, email)
 
                     val user = auth.currentUser
                     val db = FirebaseDatabase.getInstance().reference
@@ -100,7 +100,7 @@ class SignupActivity : AppCompatActivity() {
                     userId?.let {
                         db.child("Users").child(it).setValue(userInfo).addOnSuccessListener {
                             Toast.makeText(this@SignupActivity, "User registered and data saved!", Toast.LENGTH_SHORT).show()
-                            SharedPreferencesManager.writeUserDataToFile(this)
+                            SharedPreferencesManager.writeUserDataToFile(this, email)
 
                             val intent = Intent(this@SignupActivity, HomeActivity::class.java)
                             startActivity(intent)

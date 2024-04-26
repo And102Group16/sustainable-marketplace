@@ -33,7 +33,9 @@
         <activity
             android:name=".ProductDetailFragment"
             android:exported="true" />
-
+        <activity
+            android:name=".ProfileFragment"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

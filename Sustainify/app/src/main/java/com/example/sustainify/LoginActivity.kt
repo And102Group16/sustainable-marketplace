@@ -38,9 +38,14 @@ class LoginActivity : AppCompatActivity() {
         rgLoginType = findViewById(R.id.rgLoginType)
 
         // Load saved login type
-        when (SharedPreferencesManager.getUserData(this)["LoginType"]) {
-            "buyer" -> rgLoginType.check(R.id.rbBuyer)
-            "seller" -> rgLoginType.check(R.id.rbSeller)
+        val lastUsedEmail = SharedPreferencesManager.getLastUsedEmail(this)
+        if (lastUsedEmail != null) {
+            val userData = SharedPreferencesManager.getUserData(this, lastUsedEmail)
+            val loginType = userData["LoginType"]
+            when (loginType) {
+                "buyer" -> rgLoginType.check(R.id.rbBuyer)
+                "seller" -> rgLoginType.check(R.id.rbSeller)
+            }
         }
 
         // Login type selection
@@ -65,11 +70,18 @@ class LoginActivity : AppCompatActivity() {
 
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    SharedPreferencesManager.saveUserData(this, "", email, "", "", "", "", selectedOption) // Save only non-sensitive data and login type
+                    val userData = SharedPreferencesManager.getUserData(this, email)
+                    val userName = userData["UserName"] ?: "User"
+                    val loginType = userData["LoginType"]
+
+                    when (loginType) {
+                        "buyer" -> rgLoginType.check(R.id.rbBuyer)
+                        "seller" -> rgLoginType.check(R.id.rbSeller)
+                    }
+
+                    Toast.makeText(this, "Welcome back $userName", Toast.LENGTH_SHORT).show()
                     navigateToHome()
                 } else {
-                    // Handle errors
                     val errorCode = (task.exception as FirebaseAuthException).errorCode
                     handleError(errorCode)
                 }
