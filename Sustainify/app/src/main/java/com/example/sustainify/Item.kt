@@ -8,7 +8,7 @@ data class Item(
     val price: String = "",
     val images: ArrayList<String> = ArrayList(),
     val pickupLocation: String = "",
-    val seller: String = ""
-   // val sellerAddress: String,
-    // val contactInfo: String
+    val seller: String = "",
+    val sellerAddress: String = "",
+     val contactInfo: String= "",
 ) : Serializable

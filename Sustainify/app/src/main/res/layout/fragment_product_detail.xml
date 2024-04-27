@@ -183,29 +183,36 @@
             app:layout_constraintTop_toTopOf="@+id/sellerSpanContainerView" />
 
 
-        <View
-            android:id="@+id/sellerNameContainerView"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="28dp"
-            android:gravity="center"
-            android:background="@drawable/rounded_corner_box"
-            app:flow_horizontalBias="0.3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sellerSpanContainerView" />
+<!--        <View-->
+<!--            android:id="@+id/sellerNameContainerView"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/rounded_corner_box"-->
+<!--            app:flow_horizontalBias="0.3"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/sellerSpanContainerView" />-->
 
-        <TextView
-            android:id="@+id/sellerNameTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="48dp"
-            android:gravity="center"
-            android:text="John Doe"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/sellerNameContainerView"
-            app:layout_constraintTop_toTopOf="@+id/sellerNameContainerView" />
+            android:id="@+id/sellerLinearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sellerSpanTextView"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/sellerNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sellerSpanTextView" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/contactSellerButton"
@@ -215,7 +222,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sellerNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/sellerLinearLayout"
             android:background="@drawable/rounded_corner_button"
             android:layout_marginTop="26dp"/>
 

@@ -81,7 +81,7 @@ class ListingsFragment : Fragment() {
 //            intent.putExtra("key", value)
 
             // Start the activity using the intent
-            startActivity(intent)
+            startActivityForResult(intent, PRICE_FILTER_REQUEST_CODE)
 
 //            changeFragment(FilterItemsFragment());
         }
@@ -139,12 +139,13 @@ class ListingsFragment : Fragment() {
         }
         else if (requestCode == PRICE_FILTER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Retrieve data from intent
-            val maxPrice = data?.getStringExtra("maxPrice")
+            val priceLowerBound = data?.getStringExtra("priceLowerBound")?.toFloat()?.toInt()?:10
+            val priceUpperBound = data?.getStringExtra("priceUpperBound")?.toFloat()?.toInt()?:500
+            val searchRadius = data?.getStringExtra("searchRadius")?.toInt()?:50
 
+            Log.d("Filter parameters received", "$priceLowerBound, $priceUpperBound, $searchRadius")
 
-            // Create new item and add it to the list
-//            val newItem = Item(heading ?: "", description ?: "", price, ArrayList<String>() , pickupLocation ?: "", "")
-//            itemsAdapter.addItem(newItem) // You need to implement this method in your ItemsAdapter
+            itemsAdapter.applyPriceFilter(priceLowerBound, priceUpperBound)
         }
 
     }

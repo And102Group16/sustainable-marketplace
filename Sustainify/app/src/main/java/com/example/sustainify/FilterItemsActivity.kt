@@ -11,9 +11,9 @@ class FilterItemsActivity : AppCompatActivity() {
 
     private lateinit var priceRangeSlider: RangeSlider
     private lateinit var radiusSlider: Slider
-    private var priceLowerBound = 10
-    private var priceUpperBound = 500
-    private var searchRadius = 50
+    private var priceLowerBound = "10"
+    private var priceUpperBound = "500"
+    private var searchRadius = "50"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_items)
@@ -24,6 +24,9 @@ class FilterItemsActivity : AppCompatActivity() {
             intent.putExtra("priceLowerBound", priceLowerBound)
             intent.putExtra("priceUpperBound", priceUpperBound)
             intent.putExtra("searchRadius", searchRadius)
+
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
         priceRangeSlider = findViewById(R.id.priceRangeSlider)
@@ -32,16 +35,15 @@ class FilterItemsActivity : AppCompatActivity() {
         //If you only want the slider start and end value and don't care about the previous values
         priceRangeSlider.addOnChangeListener { _, _, _ ->
             val values = priceRangeSlider.values
-            priceLowerBound = values[0].toInt()
-            priceUpperBound = values[1].toInt()
+            priceLowerBound = values[0].toString()
+            priceUpperBound = values[1].toString()
         }
 
         radiusSlider.addOnChangeListener{ _, _ , _->
-            searchRadius = radiusSlider.value.toInt()
+            searchRadius = radiusSlider.value.toString()
         }
+
+
     }
 
-    companion object {
-        private const val PRICE_FILTER_REQUEST_CODE = 1002
-    }
 }

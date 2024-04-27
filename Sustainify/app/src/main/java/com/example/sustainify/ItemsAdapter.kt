@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemsAdapter(private val items: MutableList<Item>, private val role: String, private val context: Context) :
+class ItemsAdapter(private var items: MutableList<Item>, private val role: String, private val context: Context) :
     RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
-
+    // TODO save all the items in another list so that they could be recovered when the filter is reverted
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val headingTextView: TextView = itemView.findViewById(R.id.textViewHeading)
         val descriptionTextView: TextView = itemView.findViewById(R.id.textViewDescription)
@@ -46,6 +46,14 @@ class ItemsAdapter(private val items: MutableList<Item>, private val role: Strin
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun applyPriceFilter(priceLowerBound: Int, priceUpperBound: Int){
+        items = items.filter { item ->
+            val price = item.price.toInt()
+            price in priceLowerBound..priceUpperBound
+        }.toMutableList()
+        notifyDataSetChanged()
     }
 
     companion object {

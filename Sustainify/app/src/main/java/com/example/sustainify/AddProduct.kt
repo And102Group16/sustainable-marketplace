@@ -96,8 +96,8 @@ class AddProduct : AppCompatActivity() {
         submitButton.setOnClickListener {
             val itemName = itemNameEditText.text.toString()
             val setPrice = setPriceEditText.text.toString()
-//            val pickUpLocation = pickUpLocationButton.text.toString()
-            val pickUpLocation = pickupLatLng
+            val pickUpLocation = pickupAddress
+            val pickUpLatLng = pickupLatLng
             val contactInfo = contactInfoEditText.text.toString()
             val itemDescription = itemDescriptionEditText.text.toString()
 
@@ -124,6 +124,8 @@ class AddProduct : AppCompatActivity() {
                     putExtra("itemName", itemName)
                     putExtra("setPrice", setPrice)
                     putExtra("pickUpLocation", pickUpLocation)
+                    // TODO split lat and lng by colon (:)
+                    putExtra("pickUpLatLng", pickUpLatLng)
                     putExtra("contactInfo", contactInfo)
                     // TODO split the urls by comma
                     putExtra("description",itemDescription.toString())
