@@ -1,13 +1,12 @@
 package com.example.sustainify
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
+
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -44,10 +43,6 @@ class SignupActivity : AppCompatActivity() {
         toggleAddress = findViewById(R.id.switchBillingAddress)
         auth = FirebaseAuth.getInstance()
 
-//            btnSignup.setOnClickListener {
-//            // Handle Add Product Button click
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
         // Populate physical address with billing address info if toggle is clicked
         toggleAddress.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -88,7 +83,7 @@ class SignupActivity : AppCompatActivity() {
                     // Save user data locally
                     SharedPreferencesManager.saveUserData(this, name, email, phone, cardNumber, cardCVC, billingAddress, presentAddress)
                     // Write data to the file immediately after saving to SharedPreferences
-                    // SharedPreferencesManager.writeUserDataToFile(this)
+                    SharedPreferencesManager.writeUserDataToFile(this, email)
 
                     val user = auth.currentUser
                     val db = FirebaseDatabase.getInstance().reference
@@ -105,7 +100,7 @@ class SignupActivity : AppCompatActivity() {
                     userId?.let {
                         db.child("Users").child(it).setValue(userInfo).addOnSuccessListener {
                             Toast.makeText(this@SignupActivity, "User registered and data saved!", Toast.LENGTH_SHORT).show()
-                            SharedPreferencesManager.writeUserDataToFile(this)
+                            SharedPreferencesManager.writeUserDataToFile(this, email)
 
                             val intent = Intent(this@SignupActivity, HomeActivity::class.java)
                             startActivity(intent)

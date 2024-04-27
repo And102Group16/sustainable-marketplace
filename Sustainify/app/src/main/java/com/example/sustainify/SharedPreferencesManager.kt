@@ -13,56 +13,68 @@ object SharedPreferencesManager {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun saveUserData(context: Context, name: String, email: String, phone: String, cardNumber: String, cardCVC: String, billingAddress: String, presentAddress: String) {
+    fun saveUserData(
+        context: Context,
+        name: String,
+        email: String,
+        phone: String,
+        cardNumber: String,
+        cardCVC: String,
+        billingAddress: String,
+        presentAddress: String
+    ) {
         val editor = getSharedPreferences(context).edit()
-        editor.putString("UserName", name)
-        editor.putString("UserEmail", email)
-        editor.putString("UserPhone", phone)
-        editor.putString("CardNumber", cardNumber)
-        editor.putString("CardCVC", cardCVC)
-        editor.putString("BillingAddress", billingAddress)
-        editor.putString("PresentAddress", presentAddress)
+        val userPrefix = "user_$email"
+        editor.putString("${userPrefix}_UserName", name)
+        editor.putString("${userPrefix}_UserEmail", email)
+        editor.putString("${userPrefix}_UserPhone", phone)
+        editor.putString("${userPrefix}_CardNumber", cardNumber)
+        editor.putString("${userPrefix}_CardCVC", cardCVC)
+        editor.putString("${userPrefix}_BillingAddress", billingAddress)
+        editor.putString("${userPrefix}_PresentAddress", presentAddress)
         editor.apply()
     }
 
-    fun getUserData(context: Context): HashMap<String, String> {
+    fun getUserData(context: Context, email: String): HashMap<String, String> {
         val preferences = getSharedPreferences(context)
-        val name = preferences.getString("UserName", "Default Name") ?: "Default Name"
-        val email = preferences.getString("UserEmail", "Default Email") ?: "Default Email"
-        val phone = preferences.getString("UserPhone", "Default Phone") ?: "Default Phone"
-        val cardNumber = preferences.getString("CardNumber", "Default CardNumber") ?: "Default CardNumber"
-        val cardCVC = preferences.getString("CardCVC", "Default CardCVC") ?: "Default CardCVC"
-        val billingAddress = preferences.getString("BillingAddress", "Default BillingAddress") ?: "Default BillingAddress"
-        val presentAddress = preferences.getString("PresentAddress", "Default PresentAddress") ?: "Default PresentAddress"
-
-        return hashMapOf(
-            "UserName" to name,
-            "UserEmail" to email,
-            "UserPhone" to phone,
-            "CardNumber" to cardNumber,
-            "CardCVC" to cardCVC,
-            "BillingAddress" to billingAddress,
-            "PresentAddress" to presentAddress
-        )
+        val userPrefix = "user_$email"
+        val userData = HashMap<String, String>()
+        userData["UserName"] =
+            preferences.getString("${userPrefix}_UserName", "Default Name") ?: "Default Name"
+        userData["UserEmail"] = preferences.getString("${userPrefix}_UserEmail", email) ?: email
+        userData["UserPhone"] =
+            preferences.getString("${userPrefix}_UserPhone", "Default Phone") ?: "Default Phone"
+        userData["CardNumber"] =
+            preferences.getString("${userPrefix}_CardNumber", "Default CardNumber")
+                ?: "Default CardNumber"
+        userData["CardCVC"] =
+            preferences.getString("${userPrefix}_CardCVC", "Default CardCVC") ?: "Default CardCVC"
+        userData["BillingAddress"] =
+            preferences.getString("${userPrefix}_BillingAddress", "Default BillingAddress")
+                ?: "Default BillingAddress"
+        userData["PresentAddress"] =
+            preferences.getString("${userPrefix}_PresentAddress", "Default PresentAddress")
+                ?: "Default Present Address"
+        return userData
     }
 
-    fun writeUserDataToFile(context: Context) {
-        // First, fetch all the user data from SharedPreferences
-        val userData = getUserData(context)
 
-        // Create the file in internal storage
+    fun writeUserDataToFile(context: Context, email: String) {
+        val userData = getUserData(context, email)
         val fileName = "UserData.txt"
         val file = File(context.filesDir, fileName)
-
         try {
             FileOutputStream(file).use { fos ->
                 userData.forEach { (key, value) ->
                     fos.write("$key: $value\n".toByteArray())
                 }
-                fos.flush()
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun getLastUsedEmail(context: Context): String? {
+        return getSharedPreferences(context).getString("LastUsedEmail", null)
     }
 }
