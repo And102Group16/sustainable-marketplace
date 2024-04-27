@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".HomeActivity"
+    android:background="@color/light_green">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sustainify"
+        android:fontFamily="@font/inika_bold"
+        android:textSize="40sp"
+        android:textColor="@color/blue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignStart="@id/etEmail"
+        android:text="Email"
+        android:fontFamily="@font/inika_regular"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="32dp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUsername"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/input_field_background"
+        android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etEmail"
+        android:layout_alignStart="@id/etPassword"
+        android:text="@string/password"
+        android:fontFamily="@font/inika_regular"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPassword"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPassword"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/input_field_background"
+        android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_register"
+        android:fontFamily="@font/inika_regular"
+        android:textSize="24sp"
+        android:layout_below="@+id/etPassword"
+        android:layout_alignStart="@id/etPassword"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/blue"/>
+
+    <TextView
+        android:id="@+id/tvLoginAs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_as"
+        android:fontFamily="@font/inika_regular"
+        android:textSize="24sp"
+        android:layout_below="@+id/tvSignUp"
+        android:layout_alignStart="@+id/tvSignUp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"/>
+
+    <RadioGroup
+        android:id="@+id/rgLoginType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLoginAs"
+        android:layout_alignStart="@+id/tvLoginAs"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/rbBuyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buyer"
+            android:textSize="24sp"
+            android:fontFamily="@font/inika_regular"
+            android:buttonTint="@color/blue" />
+
+        <RadioButton
+            android:id="@+id/rbSeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seller"
+            android:textSize="24sp"
+            android:fontFamily="@font/inika_regular"
+            android:layout_marginStart="40dp"
+            android:buttonTint="@color/blue" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="@string/login"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inika_regular"
+        android:background="@drawable/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rgLoginType"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>

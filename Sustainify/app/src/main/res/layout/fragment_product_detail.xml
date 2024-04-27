@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CAEAA5"
+    tools:context=".ProductDetailFragment">
+        <ImageView
+            android:id="@+id/backButtonPd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_revert" />
+
+        <TextView
+            android:id="@+id/itemHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="28dp"
+            android:text="Item Heading"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/backButtonPd"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/firstLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="16dp"
+            android:background="#000000"
+            app:layout_constraintTop_toBottomOf="@id/backButtonPd" />
+
+
+        <ImageView
+            android:id="@+id/tagsIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstLine"
+            app:srcCompat="@mipmap/tag_icon_foreground" />
+
+
+        <TextView
+            android:id="@+id/tagsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Furniture"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstLine" />
+
+        <View
+            android:id="@+id/secondLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="#000000"
+            app:layout_constraintTop_toBottomOf="@id/tagsTextView" />
+
+
+        <TextView
+            android:id="@+id/priceSpanTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Price:"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondLine" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="$30"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toEndOf="@id/priceSpanTextView"
+            app:layout_constraintTop_toBottomOf="@+id/secondLine" />
+
+        <!--    We need to add images here.
+    Ref: https://stackoverflow.com/questions/29429556/android-horizontal-scrolling-image-gallery
+    -->
+        <HorizontalScrollView
+            android:id="@+id/horizontalScroll"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_corner_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceSpanTextView">
+
+            <LinearLayout
+                android:id="@+id/imageGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"></LinearLayout>
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="This is the description of the product. It might include more text than snown here"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <View
+            android:id="@+id/thirdLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="#000000"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTextView" />
+
+        <TextView
+            android:id="@+id/pickupSpanTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:text="Pickup at: "
+            android:textSize="22dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thirdLine" />
+
+        <TextView
+            android:id="@+id/pickupLocationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:text="Lindbergh, 30324"
+            android:textSize="22dp"
+            app:layout_constraintStart_toEndOf="@id/pickupSpanTextView"
+            app:layout_constraintTop_toBottomOf="@+id/thirdLine" />
+
+        <View
+            android:id="@+id/sellerSpanContainerView"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/rounded_corner_box"
+            app:flow_horizontalBias="0.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pickupLocationTextView" />
+
+        <TextView
+            android:id="@+id/sellerSpanTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:gravity="center"
+            android:text="Seller"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/sellerSpanContainerView"
+            app:layout_constraintTop_toTopOf="@+id/sellerSpanContainerView" />
+
+
+        <View
+            android:id="@+id/sellerNameContainerView"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_corner_box"
+            app:flow_horizontalBias="0.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sellerSpanContainerView" />
+
+        <TextView
+            android:id="@+id/sellerNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:gravity="center"
+            android:text="John Doe"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/sellerNameContainerView"
+            app:layout_constraintTop_toTopOf="@+id/sellerNameContainerView" />
+
+        <Button
+            android:id="@+id/contactSellerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Seller"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sellerNameTextView"
+            android:background="@drawable/rounded_corner_button"
+            android:layout_marginTop="26dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/light_green">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:context=".SignupActivity"
+        android:background="@color/light_green">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sustainify"
+            android:fontFamily="@font/inika_bold"
+            android:textSize="40sp"
+            android:textColor="@color/blue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp" />
+
+        <!-- Name Field -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_below="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etName"
+            android:text="@string/name"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName"
+            android:inputType="textPersonName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_below="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etName"
+            android:text="Username"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUsername"
+            android:inputType="textPersonName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Email Field -->
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_below="@+id/etUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etEmail"
+            android:text="@string/email"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvEmail"
+            android:inputType="textEmailAddress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Password Field -->
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_below="@+id/etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etPassword"
+            android:text="@string/password"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPassword"
+            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Confirm Password Field -->
+        <TextView
+            android:id="@+id/tvConfirmPassword"
+            android:layout_below="@+id/etPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etConfirmPassword"
+            android:text="@string/confirm_password"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvConfirmPassword"
+            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Phone Field -->
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_below="@+id/etConfirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etPhone"
+            android:text="@string/phone"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPhone"
+            android:inputType="text|phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Card Number Field -->
+        <TextView
+            android:id="@+id/tvCardNumber"
+            android:layout_below="@+id/etPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etCardNumber"
+            android:text="@string/card_number"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etCardNumber"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCardNumber"
+            android:inputType="text|number"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Card CVC Field -->
+        <TextView
+            android:id="@+id/tvCardCVC"
+            android:layout_below="@+id/etCardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etCardCVC"
+            android:text="@string/card_cvc"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etCardCVC"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCardCVC"
+            android:inputType="text|number"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Billing Address Field -->
+        <TextView
+            android:id="@+id/tvBillingAddress"
+            android:layout_below="@+id/etCardCVC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etBillingAddress"
+            android:text="@string/billing_address"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etBillingAddress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBillingAddress"
+            android:inputType="textPostalAddress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <!-- Billing Address Question -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchBillingAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etBillingAddress"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:text="@string/billing_address_question"
+            android:layoutDirection="rtl" />
+
+        <!-- Present Address Field -->
+        <TextView
+            android:id="@+id/tvPresentAddress"
+            android:layout_below="@+id/switchBillingAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_alignStart="@id/etPresentAddress"
+            android:text="@string/present_address"
+            android:fontFamily="@font/inika_regular"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etPresentAddress"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPresentAddress"
+            android:inputType="textPostalAddress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/input_field_background"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/sign_up"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inika_regular"
+            android:background="@drawable/login_button"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/etPresentAddress"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp"/>
+
+    </RelativeLayout>
+</ScrollView>
