@@ -150,3 +150,25 @@ this section]
   <a href="https://submissions.us-east-1.linodeobjects.com/and102/ol_0BN4G.gif" target="_blank">GIF</a>
 
 <br>
+
+# Milestone 3 - Build Sprint 2 (Unit 9)
+
+## GitHub Project board
+<a href="https://ibb.co/z8yYtzs"><img src="https://i.ibb.co/PT7nVdx/Screenshot-2024-04-26-at-10-30-49-PM.png" alt="Screenshot-2024-04-26-at-10-30-49-PM" border="0"></a>
+
+## Completed user stories
+- List the completed user stories from this unit
+    - [x] Choose location from a map
+    - [x] Update profile details, passwords, and card details
+    - [x] Filter products by price range
+- List any pending user stories / any user stories you decided to cut from the original requirements
+    - [ ] Filter products by distance in miles
+    - [ ] Chat with the seller in-app
+
+## Progress GIFs
+![Progress Gif](https://github.com/And102Group16/sustainable-marketplace/blob/firebase-filter/Milestone%203%20-%20Project%20Progress.gif)
+
+![Progress Gif](https://github.com/And102Group16/sustainable-marketplace/blob/firebase-filter/Milestone%203%20-%20Progress%202%20Profile%20Update.gif)
+
+
+## App Demo Video
